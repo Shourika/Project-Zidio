@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .preview {
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .resume-section {
+            margin-bottom: 20px;
+        }
+
+        .resume-section h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .theme-selector,
+        .format-selector {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .theme-selector button,
+        .format-selector button {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .theme-selector button.active,
+        .format-selector button.active {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        /* Theme 1 */
+        .theme1 .resume-section {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .theme1 .resume-section h3 {
+            color: #007bff;
+        }
+
+        /* Theme 2 */
+        .theme2 .resume-section {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .theme2 .resume-section h3 {
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resume Builder</h1>
+        <div class="section">
+            <h2>Personal Information</h2>
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number">
+            </div>
+            <div class="input-group">
+                <label for="linkedin">LinkedIn Profile</label>
+                <input type="url" id="linkedin" placeholder="Enter your LinkedIn profile URL">
+            </div>
+        </div>
+        <div class="section">
+            <h2>Work Experience</h2>
+            <div class="input-group">
+                <label for="work-experience">Details</label>
+                <textarea id="work-experience" rows="5" placeholder="Describe your work experience"></textarea>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Education</h2>
+            <div class="input-group">
+                <label for="education">Details</label>
+                <textarea id="education" rows="5" placeholder="Describe your education background"></textarea>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="input-group">
+                <label for="skills">Details</label>
+                <textarea id="skills" rows="5" placeholder="List your skills"></textarea>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Achievements</h2>
+            <div class="input-group">
+                <label for="achievements">Details</label>
+                <textarea id="achievements" rows="5" placeholder="Describe your achievements"></textarea>
+            </div>
+        </div>
+        <div class="theme-selector">
+            <button class="theme-btn" data-theme="theme1">Theme 1</button>
+            <button class="theme-btn" data-theme="theme2">Theme 2</button>
+        </div>
+        <div class="format-selector">
+            <button class="format-btn" data-format="pdf">PDF</button>
+            <button class="format-btn" data-format="docx">DOCX</button>
+        </div>
+        <div class="actions">
+            <button id="preview-btn">Preview</button>
+            <button id="download-btn">Download</button>
+        </div>
+        <div class="preview">
+            <h2>Resume Preview</h2>
+            <div id="resume-preview">
+                <div class="resume-section">
+                    <h3>Personal Information</h3>
+                  <b>Name:</b> <p id="preview-name"></p>
+                  <b>Email:</b>  <p id="preview-email"></p>
+                    <b>Phone No:</b><p id="preview-phone"></p>
+                   <b>Linkedin profile:</b><p id="preview-linkedin"></p>
+                </div>
+                <div class="resume-section">
+                    <h3>Work Experience</h3>
+                    <p id="preview-work-experience"></p>
+                </div>
+                <div class="resume-section">
+                    <h3>Education</h3>
+                    <p id="preview-education"></p>
+                </div>
+                <div class="resume-section">
+                    <h3>Skills</h3>
+                    <p id="preview-skills"></p>
+                </div>
+                <div class="resume-section">
+                    <h3>Achievements</h3>
+                    <p id="preview-achievements"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const linkedinInput = document.getElementById('linkedin');
+        const workExperienceInput = document.getElementById('work-experience');
+        const educationInput = document.getElementById('education');
+        const skillsInput = document.getElementById('skills');
+        const achievementsInput = document.getElementById('achievements');
+
+        const previewName = document.getElementById('preview-name');
+        const previewEmail = document.getElementById('preview-email');
+        const previewPhone = document.getElementById('preview-phone');
+        const previewLinkedin = document.getElementById('preview-linkedin');
+        const previewWorkExperience = document.getElementById('preview-work-experience');
+        const previewEducation = document.getElementById('preview-education');
+        const previewSkills = document.getElementById('preview-skills');
+        const previewAchievements = document.getElementById('preview-achievements');
+
+        function updatePreview() {
+            previewName.textContent = nameInput.value;
+            previewEmail.textContent = emailInput.value;
+            previewPhone.textContent = phoneInput.value;
+            previewLinkedin.textContent = linkedinInput.value;
+            previewWorkExperience.textContent = workExperienceInput.value;
+            previewEducation.textContent = educationInput.value;
+            previewSkills.textContent = skillsInput.value;
+            previewAchievements.textContent = achievementsInput.value;
+        }
+
+        nameInput.addEventListener('input', updatePreview);
+        emailInput.addEventListener('input', updatePreview);
+        phoneInput.addEventListener('input', updatePreview);
+        linkedinInput.addEventListener('input', updatePreview);
+        workExperienceInput.addEventListener('input', updatePreview);
+        educationInput.addEventListener('input', updatePreview);
+        skillsInput.addEventListener('input', updatePreview);
+        achievementsInput.addEventListener('input', updatePreview);
+
+        document.querySelectorAll('.theme-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById('resume-preview').className = button.dataset.theme;
+            });
+        });
+
+        document.querySelectorAll('.format-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.format-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // Implement format change logic here
+            });
+        });
+
+        document.getElementById('preview-btn').addEventListener('click', updatePreview);
+
+        document.getElementById('download-btn').addEventListener('click', () => {
+            // Implement download logic here
+        });
+
+        // Implement LinkedIn integration, real-time preview, and spell checker logic here
+    </script>
+</body>
+
+</html>
